@@ -9,14 +9,22 @@ export class AuthService {
   constructor(private router: Router) { }
 
   setToken(token: string) {
-    localStorage.setItem('access_token', token);
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('access_token', token);
+    }
   }
+
   getToken() {
-    return localStorage.getItem('access_token');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem('access_token');
+    }
+    return null;
   }
 
   logout() {
-    localStorage.removeItem('access_token');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('access_token');
+    }
     this.router.navigate(['/login']);
   }
 

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BulkUploadBooksComponent } from './bulk-upload-books/bulk-upload-books.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BulkUploadBooksComponent],
+  imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   standalone: true,

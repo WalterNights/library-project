@@ -1,19 +1,19 @@
-import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-bulk-upload-books',
-  standalone : true,
-  imports: [NgIf, FormsModule],
+  standalone: false,
   templateUrl: './bulk-upload-books.component.html',
+  styleUrls: ['./bulk-upload-books.component.css'],
 })
 export class BulkUploadBooksComponent {
   selectedFile: File | null = null;
   message: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
+
   onFileChange(event: any) {
     this.selectedFile = event.target.files[0];
   }
@@ -23,6 +23,7 @@ export class BulkUploadBooksComponent {
       console.log('No file selected');
       return;
     }
+
     console.log('File selected:', this.selectedFile);
 
     const formData = new FormData();
