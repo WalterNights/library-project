@@ -3,8 +3,6 @@ from library_app.models import User, Book
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import TemplateView, DetailView, ListView, CreateView, UpdateView
 
-# Create your views here.
-
 def is_admin(user):
     return user.is_authenticated and user.is_staff
 

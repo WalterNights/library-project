@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
-# Create your models here.
-
 class UserManager(BaseUserManager):
 
     def create_user(self, username, email, password=None, **extra_fields):
@@ -45,7 +43,7 @@ class User(AbstractUser):
         ('user', 'Usuario Regular'),
         ('admin', 'Administrador'),
     )
-    rol=models.CharField(max_length=10, choices=ROL_CHOICES, default='user')
+    rol = models.CharField(max_length=10, choices=ROL_CHOICES, default='user')
     borrowed_book = models.ManyToManyField(Book, blank=True, related_name='user_with_book')
 
     objects = UserManager()

@@ -1,8 +1,7 @@
-from library_app.models import User, Book
 from django.shortcuts import render
+from library_app.models import User, Book
 from django.views.generic import TemplateView, DetailView, ListView, CreateView, UpdateView
 
-# Create your views here.
 class IndexView(TemplateView):
     model = User
     template_name = "index/index.html"
