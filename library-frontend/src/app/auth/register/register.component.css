@@ -1,0 +1,11 @@
+.user-fullname-container {
+    width: 80%;
+    height: 10%;
+}
+
+.user-fullname-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+}

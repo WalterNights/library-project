@@ -1,50 +1,76 @@
-<p>Registrate</p>
-<form (ngSubmit)="register()" #registerForm="ngForm">
-    <div>
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username" [(ngModel)]="credentials.username" required>
-    </div>
-    <div>
-        <label for="first_name">Nombre:</label>
-        <input type="text" id="first_name" name="first_name" [(ngModel)]="credentials.first_name" required>
-    </div>
-    <div>
-        <label for="last_name">Apellido:</label>
-        <input type="text" id="last_name" name="last_name" [(ngModel)]="credentials.last_name" required>
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" [(ngModel)]="credentials.email" required>
-    </div>
-    <div>
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" [(ngModel)]="credentials.password" required>
-    </div>
-    <div>
-        <label for="password_confirmation">Confirmar Contraseña:</label>
-        <input type="password" id="password_confirmation" name="password_confirmation"
-            [(ngModel)]="confirmPassword" required>
-    </div>
+<div class="user-access-container display-center full-screen">
+    <div class="user-access-content display-column">
+        <h2>Registrate</h2>
+        <form (ngSubmit)="register()" #registerForm="ngForm" class="display-column-evenly content-fluid">
+            <div class="display-column-evenly input-container form-field-container">
+                <div class="input-w-80">
+                    <label for="username">Usuario:</label>
+                </div>
+                <input class="input-w-80" type="text" id="username" name="username" [(ngModel)]="credentials.username" required>
+            </div>
+            <div class="user-fullname-container display-between form-field-container">
+                <div class="user-fullname-content">
+                    <div>
+                        <label for="first_name">Nombre:</label>
+                    </div>
+                    <input type="text" id="first_name" name="first_name" [(ngModel)]="credentials.first_name" required>
+                </div>
+                <div class="user-fullname-content">
+                    <div>
+                        <label for="last_name">Apellido:</label>
+                    </div>
+                    <input type="text" id="last_name" name="last_name" [(ngModel)]="credentials.last_name" required>
+                </div>
+            </div>
 
-    <div *ngIf="credentials.password && credentials.username && credentials.password.includes(credentials.username)">
-        <span style="color: red">La contraseña no debe contener el nombre de usuario</span>
-    </div>
-    <div *ngIf="credentials.password && credentials.password.length < 8">
-        <span style="color: red">La contraseña debe tener al menos 8 caracteres</span>
-    </div>
-    <div *ngIf="credentials.password && credentials.password !== confirmPassword">
-        <span style="color: red">Las contraseñas no coinciden</span>
-    </div>
-    <div *ngIf="error" style="color:red">{{ error }}</div>
-    <div *ngIf="success" style="color: green">{{ success }}</div>
+            <div class="display-column-evenly input-container form-field-container">
+                <div class="input-w-80">
+                    <label for="email">Email:</label>
+                </div>
+                <input class="input-w-80" type="email" id="email" name="email" [(ngModel)]="credentials.email" required>
+            </div>
+            <div class="display-column-evenly input-container form-field-container">
+                <div class="input-w-80">
+                    <label for="password">Contraseña:</label>
+                </div>
+                <input class="input-w-80" type="password" id="password" name="password" [(ngModel)]="credentials.password" required>
+            </div>
+            <div class="display-column-evenly input-container form-field-container">
+                <div class="input-w-80">
+                    <label for="password_confirmation">Confirmar Contraseña:</label>
+                </div>
+                <input class="input-w-80" type="password" id="password_confirmation" name="password_confirmation" [(ngModel)]="confirmPassword"
+                    required>
+            </div>
+    
+            <div
+                *ngIf="credentials.password && credentials.username && credentials.password.includes(credentials.username)">
+                <span style="color: red">La contraseña no debe contener el nombre de usuario</span>
+            </div>
+            <div *ngIf="credentials.password && credentials.password.length < 8">
+                <span style="color: red">La contraseña debe tener al menos 8 caracteres</span>
+            </div>
+            <div *ngIf="credentials.password && credentials.password !== confirmPassword">
+                <span style="color: red">Las contraseñas no coinciden</span>
+            </div>
+            <div *ngIf="error" style="color:red">{{ error }}</div>
+            <div *ngIf="success" style="color: green">{{ success }}</div>
+            <button class="submit-button" type="submit" [disabled]="
+                    registerForm.invalid || 
+                    credentials.password.includes(credentials.username) || 
+                    credentials.password.length < 8 || 
+                    credentials.password !== confirmPassword
+                ">
+                Enviar
+            </button>
+        </form>
 
-    <button type="submit" [disabled]="
-            registerForm.invalid || 
-            credentials.password.includes(credentials.username) || 
-            credentials.password.length < 8 || 
-            credentials.password !== confirmPassword
-        ">
-        Registrarse
-    </button>
-
-</form>
+        <div *ngIf="showModal" class="modal-backdrop">
+            <div class="modal-content display-column">
+                <img src="loading2.gif" alt="Cargando...">
+                <p>En unos minutos estará todo listo</p>
+            </div>
+        </div>
+        
+    </div>
+</div>

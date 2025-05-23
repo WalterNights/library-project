@@ -12,13 +12,19 @@ export class LoginComponent {
   credentials = { username: '', password: '' };
   error = '';
 
+  showModal = false;
+
   constructor(private http: HttpClient, private router: Router) {}
 
   login() {
     this.http.post<any>('http://localhost:8000/api/token/', this.credentials).subscribe({
       next: res => {
         localStorage.setItem('access_token', res.access);
-        this.router.navigate(['/']);
+        this.showModal = true;
+        setTimeout(() => {
+          this.showModal = false;  
+          this.router.navigate(['/']);
+        }, 3000);
       },
       error: () => {
         this.error = 'Usuario o contraseña incorrectos';

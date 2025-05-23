@@ -16,9 +16,11 @@ export class RegisterComponent {
     email: '',
     password: ''
   };
+
   confirmPassword = '';
   error = '';
   success = '';
+  showModal = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -37,7 +39,12 @@ export class RegisterComponent {
     this.http.post<any>('http://localhost:8000/auth/register/', this.credentials).subscribe({
       next: () => {
         this.success = 'Registro exitoso. ahora puedes iniciar sesión.';
-        this.router.navigate(['/login']);
+        this.error = '';
+        this.showModal = true;
+        setTimeout(() => {
+          this.showModal = false;
+          this.router.navigate(['/login']);
+        }, 3000);
       },
       error: err => {
         this.error = err.error?.detail || 'Error al registrar el usuario';

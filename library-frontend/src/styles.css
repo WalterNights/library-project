@@ -1,1 +1,135 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.display-center,
+.display-column,
+.display-between,
+.display-column-evenly,
+.display-column-between {
+    display: flex;
+    align-items: center;
+}
+
+.display-center {
+    justify-content: center;
+}
+
+.display-column {
+    justify-content: center;
+    flex-direction: column;
+}
+
+.display-between {
+    justify-content: space-between;
+}
+
+.display-column-evenly {
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.display-column-between {
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.full-screen {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+}
+
+.content-fluid {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+}
+
+.user-access-container {
+    background-color: #fff5e3;
+}
+
+.user-access-content {
+    width: 55rem;
+    height: 70%;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-access-content h2 {
+    font-size: 3rem;
+    color: #ffa500;
+}
+
+.input-container {
+    width: 100%;
+    height: 10%;
+}
+
+.input-w-80 {
+    width: 80%;
+}
+
+.form-field-container {
+    font-size: 1.5rem;
+}
+
+.form-field-container input {
+    height: 3rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e2e2e2;
+}
+
+.submit-button {
+    width: 80%;
+    height: 4rem;
+    color: #7d4c00;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffa500;
+    cursor: pointer;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    width: 45rem;
+    height: 25rem;
+    background: #fff;
+    font-size: 2rem;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-content img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+}

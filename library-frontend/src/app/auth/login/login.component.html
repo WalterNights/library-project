@@ -1,12 +1,31 @@
-<h2>Iniciar Sesión</h2>
-<form (ngSubmit)="login()">
-  <label>Usuario:</label>
-  <input type="text" [(ngModel)]="credentials.username" name="username" required />
+<div class="user-access-container display-center full-screen">
+  <div class="user-access-content display-column">
+    <h2>Iniciar Sesión</h2>
+    <form (ngSubmit)="login()" class="display-column-evenly content-fluid">
+      <div class="display-column-evenly input-container form-field-container">
+        <div class="input-w-80">
+          <label>Usuario:</label>
+        </div>
+        <input class="input-w-80" type="text" [(ngModel)]="credentials.username" name="username" required />
+      </div>
+      <div class="display-column-evenly input-container form-field-container">
+        <div class="input-w-80">
+          <label>Contraseña:</label>
+        </div>
+        <input class="input-w-80" type="password" [(ngModel)]="credentials.password" name="password" required />
+      </div>
 
-  <label>Contraseña:</label>
-  <input type="password" [(ngModel)]="credentials.password" name="password" required />
+      <button class="submit-button" type="submit">Entrar</button>
+    </form>
 
-  <button type="submit">Entrar</button>
-</form>
+    <p *ngIf="error" style="color:red">{{ error }}</p>
 
-<p *ngIf="error" style="color:red">{{ error }}</p>
+    <div *ngIf="showModal" class="modal-backdrop">
+      <div class="modal-content display-column">
+        <img src="loading2.gif" alt="Cargando...">
+        <p>En unos minutos estará todo listo</p>
+      </div>
+    </div>
+
+  </div>
+</div>
