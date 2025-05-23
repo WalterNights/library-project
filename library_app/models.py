@@ -31,7 +31,7 @@ class UserManager(BaseUserManager):
 class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    year_publication = models.DateField(default=None)
+    year_publication = models.CharField(max_length=4)
     stock = models.PositiveIntegerField()
 
     def __str__(self):

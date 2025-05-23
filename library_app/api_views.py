@@ -42,7 +42,7 @@ def return_book(request, pk):
     return Response({'mensaje': f'{book.title} Devuelto correctamente.'})
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
+@permission_classes([])
 def bulk_upload_books(request):
     excel_file = request.FILES.get('file')
     if not excel_file:

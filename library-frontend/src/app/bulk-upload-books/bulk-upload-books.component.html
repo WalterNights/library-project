@@ -1,0 +1,6 @@
+<h2>Carga masiva de libros</h2>
+<form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <input type="file" (change)="onFileChange($event)" accept=".xlsx, .xls" required>
+  <button type="submit" [disabled]="!selectedFile">Subir archivo</button>
+</form>
+<div *ngIf="message">{{ message }}</div>
