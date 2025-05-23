@@ -1,9 +1,8 @@
-from django.urls import path, include
-from django.contrib import admin
 from . import views
+from django.urls import path
+from django.contrib import admin
+from .views import RegisterUserApiView
 
 urlpatterns = [
-    path('registration/', views.user_registration, name='registration'),
-    path('login/', views.user_login, name='login'),
-    path('logout/', views.user_logout, name='logout')
+    path('register/', RegisterUserApiView.as_view(), name='register')
 ]

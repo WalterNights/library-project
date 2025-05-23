@@ -18,7 +18,7 @@ export class LoginComponent {
     this.http.post<any>('http://localhost:8000/api/token/', this.credentials).subscribe({
       next: res => {
         localStorage.setItem('access_token', res.access);
-        this.router.navigate(['/books']);
+        this.router.navigate(['/']);
       },
       error: () => {
         this.error = 'Usuario o contraseña incorrectos';

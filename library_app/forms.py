@@ -23,7 +23,7 @@ class RegisterUserForm(forms.ModelForm):
     
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.get_password(self.cleaned_data['password'])
+        user.set_password(self.cleaned_data['password'])
         user.rol = 'user'
         user.is_staff = False
         if commit:

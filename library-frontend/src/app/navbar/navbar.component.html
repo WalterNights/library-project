@@ -1,0 +1,4 @@
+<p>navbar works!</p>
+<nav>
+  <button *ngIf="authService.isAuthenticated()" (click)="logout()">Cerrar sesión</button>
+</nav>

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,21 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  setToken(token: string) {
+    localStorage.setItem('access_token', token);
+  }
+  getToken() {
+    return localStorage.getItem('access_token');
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    this.router.navigate(['/login']);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
 }
