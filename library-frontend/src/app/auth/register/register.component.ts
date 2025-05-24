@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { ModalComponent } from '../../shared/modal/modal.component';
 
 
@@ -41,7 +42,7 @@ export class RegisterComponent {
       return;
     }
 
-    this.http.post<any>('http://localhost:8000/auth/register/', this.credentials).subscribe({
+    this.http.post<any>(`${environment.apiUrl}/auth/register/`, this.credentials).subscribe({
       next: () => {
         this.success = 'Registro exitoso. ahora puedes iniciar sesión.';
         this.error = '';

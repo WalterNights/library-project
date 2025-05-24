@@ -3,7 +3,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { ModalComponent } from '../../shared/modal/modal.component';
+
 
 @Component({
   selector: 'app-login',
@@ -21,11 +23,11 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   login() {
-    this.http.post<any>('http://localhost:8000/api/token/', this.credentials).subscribe({
+    this.http.post<any>(`${environment.apiUrl}/api/token/`, this.credentials).subscribe({
       next: res => {
         localStorage.setItem('access_token', res.access);
         this.showModal = true;
-        this.http.get<any>(`http://localhost:8000/api/users/me/`, {
+        this.http.get<any>(`${environment.apiUrl}/api/users/me/`, {
           headers: { Authorization: `Bearer ${res.access}` }
         }).subscribe(user => {
           localStorage.setItem('user_id', user.id);

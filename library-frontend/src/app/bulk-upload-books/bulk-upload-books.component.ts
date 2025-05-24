@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-bulk-upload-books',
@@ -29,7 +30,7 @@ export class BulkUploadBooksComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post('http://localhost:8000/api/books/bulk_upload/', formData).subscribe({
+    this.http.post(`${environment.apiUrl}/api/books/bulk_upload/`, formData).subscribe({
       next: (res: any) => {
         this.message = res.message || 'Carga exitosa.';
       },
