@@ -1,5 +1,6 @@
 from . import api_views
 from django.urls import path
+from library_app.views import current_user
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -12,6 +13,9 @@ urlpatterns = [
     path('books/<int:pk>/lend/', api_views.lend_book, name='api_lend_book'),
     path('books/<int:pk>/return/', api_views.return_book, name='api_return_book'),
     path('books/bulk_upload/', api_views.bulk_upload_books, name='api_bulk_upload_books'),
+    
+    path('users/me/', current_user, name='current_user'),
+    path('users/me/history', api_views.user_loan_history, name='user_loan_history'),
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),

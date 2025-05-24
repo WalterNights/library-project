@@ -1,7 +1,7 @@
 import pandas as pd
-from .models import Book
+from .models import Book, LoanHistory
 from rest_framework import status
-from .serializers import BookSerializer
+from .serializers import BookSerializer, LoanHistorySerializer
 from rest_framework.response import Response
 from rest_framework import generics, permissions
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -30,7 +30,9 @@ class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 def lend_book(request, pk):
     user = request.user
     book = Book.objects.get(pk=pk)
-    user.borrowed_book.add(Book)
+    user.borrowed_book.add(book)
+    LoanHistory.objects.create(user=user, book=book, action='borrow')
+    book.stock -= 1
     return Response({'mensaje': f'{book.title} Prestado correctamente.'})
 
 @api_view(['POST'])
@@ -38,7 +40,9 @@ def lend_book(request, pk):
 def return_book(request, pk):
     user = request.user
     book = Book.objects.get(pk=pk)
-    user.borrowed_book.remove(Book)
+    user.borrowed_book.remove(book)
+    LoanHistory.objects.create(user=user, book=book, action='return')
+    book.stock += 1
     return Response({'mensaje': f'{book.title} Devuelto correctamente.'})
 
 @api_view(['POST'])
@@ -62,3 +66,11 @@ def bulk_upload_books(request):
         return Response({'mensaje': 'Libros subidos correctamente.'}, status=status.HTTP_201_CREATED)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_loan_history(request):
+    user = request.user
+    loan_history = LoanHistory.objects.filter(user=user).order_by('-timestamp')
+    serializer = LoanHistorySerializer(loan_history, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

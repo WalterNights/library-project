@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 class UserManager(BaseUserManager):
@@ -50,3 +51,16 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+class LoanHistory(models.Model):
+    ACTION_CHOICES = (
+        ('borrow', 'Préstamo'),
+        ('return', 'Devolución'),
+    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    action = models.CharField(max_length=10, choices=ACTION_CHOICES)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.book.title} - {self.action} - {self.timestamp}'

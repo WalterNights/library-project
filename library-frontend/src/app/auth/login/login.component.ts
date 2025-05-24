@@ -18,17 +18,22 @@ export class LoginComponent {
 
   showModal = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   login() {
     this.http.post<any>('http://localhost:8000/api/token/', this.credentials).subscribe({
       next: res => {
         localStorage.setItem('access_token', res.access);
         this.showModal = true;
-        setTimeout(() => {
-          this.showModal = false;  
-          this.router.navigate(['/']);
-        }, 3000);
+        this.http.get<any>(`http://localhost:8000/api/users/me/`, {
+          headers: { Authorization: `Bearer ${res.access}` }
+        }).subscribe(user => {
+          localStorage.setItem('user_id', user.id);
+          setTimeout(() => {
+            this.showModal = false;
+            this.router.navigate(['/']);
+          }, 3000);
+        });
       },
       error: () => {
         this.error = 'Usuario o contraseña incorrectos';
