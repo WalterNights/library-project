@@ -1,0 +1,32 @@
+import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-books-list',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './books-list.component.html',
+  styleUrls: ['./books-list.component.css']
+})
+export class BooksListComponent {
+  books: any[] = [];
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  ngOnInit() {
+    this.http.get<any[]>('http://localhost:8000/api/books/').subscribe({
+      next: (data) => {
+        this.books = data;
+      },
+      error: (error) => {
+        console.error('Error fetching books:', error);
+      }
+    });
+  }
+
+  viewDetails(bookId: number) {
+    this.router.navigate(['/books', bookId]);
+  }
+}

@@ -1,0 +1,43 @@
+.books-list-container h2 {
+    font-size: 3rem;
+    margin: 2rem 0;
+}
+
+.books-list-container button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #ffa500;
+    font-weight: 600;
+}
+
+.books-list-content {
+    width: 80%;
+    padding: 2rem;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.books-list-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.books-list-content thead th{
+    font-size: 1.5rem;
+}
+
+.books-list-content tbody td{
+    font-size: 1.2rem;
+    background-color: #fafafa;
+}
+
+.books-list-content td {
+    padding: 0.5rem;
+    border: solid 1px #ccc;
+}
+
+.text-center {
+    text-align: center;
+}

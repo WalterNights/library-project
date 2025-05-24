@@ -14,6 +14,6 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   showNavbar(): boolean {
-    return !['/login', '/register'].includes(this.router.url);
+    return !['/auth/login', '/auth/register'].includes(this.router.url);
   }
 }

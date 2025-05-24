@@ -20,12 +20,7 @@
 
     <p *ngIf="error" style="color:red">{{ error }}</p>
 
-    <div *ngIf="showModal" class="modal-backdrop">
-      <div class="modal-content display-column">
-        <img src="loading2.gif" alt="Cargando...">
-        <p>En unos minutos estará todo listo</p>
-      </div>
-    </div>
+    <app-modal [show]="showModal"></app-modal>
 
   </div>
 </div>

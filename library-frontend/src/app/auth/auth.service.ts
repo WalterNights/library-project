@@ -25,7 +25,7 @@ export class AuthService {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem('access_token');
     }
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth//login']);
   }
 
   isAuthenticated(): boolean {

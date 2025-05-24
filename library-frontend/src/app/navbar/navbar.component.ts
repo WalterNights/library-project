@@ -1,18 +1,31 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth/auth.service';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(public authService: AuthService) { }
+
+  showModal = false;
+
+  constructor(public authService: AuthService, private location: Location) { }
 
   logout() {
-    this.authService.logout();
+    this.showModal = true;
+    setTimeout(() => {
+      this.showModal = false;
+      this.authService.logout();
+    }, 3000);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

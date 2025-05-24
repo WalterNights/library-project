@@ -1,0 +1,27 @@
+<div class="user-access-container display-column-evenly books-list-container">
+    <h2>Colección de Libros</h2>
+    <div class="books-list-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Año de publicación</th>
+                    <th>Cantidad disponible</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td class="text-center">{{ book.year_publication }}</td>
+                    <td class="text-center">{{ book.stock }}</td>
+                    <td class="text-center">
+                        <button (click)="viewDetails(book.id)">Ver detalles</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

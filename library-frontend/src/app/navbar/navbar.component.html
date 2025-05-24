@@ -1,4 +1,8 @@
-<p>navbar works!</p>
-<nav>
-  <button *ngIf="authService.isAuthenticated()" (click)="logout()">Cerrar sesión</button>
+<nav style="background-color: #fff5e3;">
+  <div class="display-between">
+    <button (click)="goBack()">Regresar</button>
+    <button *ngIf="authService.isAuthenticated()" (click)="logout()">Cerrar sesión</button>
+  </div>
+
+  <app-modal [show]="showModal"></app-modal>
 </nav>

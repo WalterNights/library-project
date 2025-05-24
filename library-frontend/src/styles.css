@@ -13,6 +13,7 @@ html {
 .display-center,
 .display-column,
 .display-between,
+.display-evenly,
 .display-column-evenly,
 .display-column-between {
     display: flex;
@@ -26,6 +27,10 @@ html {
 .display-column {
     justify-content: center;
     flex-direction: column;
+}
+
+.display-evenly {
+    justify-content: space-evenly;
 }
 
 .display-between {
@@ -132,4 +137,31 @@ html {
     width: 64px;
     height: 64px;
     margin-bottom: 1rem;
+}
+
+/*============index page styles ============*/
+
+.index-book-container {
+    width: 80%;
+    height: 80%;
+}
+
+.index-book-options {
+    width: 30rem;
+    height: 50rem;
+    font-size: 2.5rem;
+    padding: 2rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.index-book-options:hover {
+    background-color: #ffa500;;
+    transform: scale(1.1);
+    color: white;
+    transition: all 0.3s ease-in-out;
 }
