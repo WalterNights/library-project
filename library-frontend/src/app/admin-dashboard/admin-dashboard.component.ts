@@ -14,9 +14,12 @@ import { ModalComponent } from '../shared/modal/modal.component';
 export class AdminDashboardComponent implements OnInit {
 
   users: any[] = [];
+  books: any[] = [];
   showUserDetails = false;
   selectedUser: any = null;
   selectedUserHistory: any[] = [];
+
+  viewMode: 'users' | 'books' = 'users';
 
   showModal = false;
   showBookCreateModal = false;
@@ -29,6 +32,20 @@ export class AdminDashboardComponent implements OnInit {
     this.http.get<any>('/api/users', {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(users => this.users = users);
+
+    this.http.get<any>('/api/books', {
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe(books => {
+      this.books = books;
+    });
+  }
+
+  showUsers() {
+    this.viewMode = 'users';
+  }
+
+  showBooks() {
+    this.viewMode = 'books';
   }
 
   viewUserDetails(user: any) {
@@ -51,9 +68,15 @@ export class AdminDashboardComponent implements OnInit {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(() => {
       this.closeModalBookCreate();
-      setTimeout(() => {
-        this.showModal = false;
-      }, 3000);
+      // Recarga la lista de libros
+      this.http.get<any>('/api/books/', {
+        headers: { Authorization: `Bearer ${token}` }
+      }).subscribe(books => {
+        this.books = books;
+        setTimeout(() => {
+          this.showModal = false;
+        }, 3000);
+      });
     });
   }
 
@@ -73,9 +96,15 @@ export class AdminDashboardComponent implements OnInit {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(() => {
         this.closeModalBulkCreate();
-        setTimeout(() => {
-          this.showModal = false;
-        }, 3000);
+        // Recarga la lista de libros
+        this.http.get<any>('/api/books/', {
+          headers: { Authorization: `Bearer ${token}` }
+        }).subscribe(books => {
+          this.books = books;
+          setTimeout(() => {
+            this.showModal = false;
+          }, 3000);
+        });
       });
     }
   }
@@ -101,9 +130,15 @@ export class AdminDashboardComponent implements OnInit {
     }).subscribe(() => {
       this.editBookModal = false;
       this.bookToEdit = null;
-      setTimeout(() => {
-        this.showModal = false;
-      }, 2000);
+      // Recarga la lista de libros
+      this.http.get<any>('/api/books/', {
+        headers: { Authorization: `Bearer ${token}` }
+      }).subscribe(books => {
+        this.books = books;
+        setTimeout(() => {
+          this.showModal = false;
+        }, 2000);
+      });
     });
   }
 

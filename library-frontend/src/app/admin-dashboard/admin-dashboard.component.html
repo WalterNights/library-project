@@ -1,92 +1,121 @@
 <div class="user-access-container display-column dashboard-container">
     <h2>Panel de Administración</h2>
-    <div class="book-create-options display-evenly">
-        <button (click)="openModalBookCreate()">Crear libro</button>
-        <button (click)="openModalBulkCreate()">Carga masiva de libros</button>
+    <div class="dashboard-toggle list-options display-evenly">
+        <button (click)="showUsers()" [disabled]="viewMode === 'users'">Usuarios</button>
+        <button (click)="showBooks()" [disabled]="viewMode === 'books'">Libros</button>
     </div>
-    <h3>Usuarios</h3>
-    <div class="table-container dashboard-content">
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Usuario</th>
-                <th>Rol</th>
-                <th>Acciones</th>
-            </tr>
-            <tr *ngFor="let user of users">
-                <td class="text-center">{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td class="text-center">{{ user.rol }}</td>
-                <td class="text-center">
-                    <button (click)="viewUserDetails(user)">Ver detalle</button>
-                </td>
-            </tr>
-        </table>
+    <div *ngIf="viewMode === 'users'" class="user-table-container">
+        <h3>Usuarios</h3>
+        <div class="table-container dashboard-content">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+                <tr *ngFor="let user of users">
+                    <td class="text-center">{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td class="text-center">{{ user.rol }}</td>
+                    <td class="text-center">
+                        <button (click)="viewUserDetails(user)">Ver detalle</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div *ngIf="showUserDetails" class="table-container dashboard-content">
+            <h4>Detalle de {{ selectedUser.username }}</h4>
+            <table>
+                <tr>
+                    <th>Correo</th>
+                    <th>Lirbos prestados</th>
+                </tr>
+                <tr>
+                    <td>{{ selectedUser.email }}</td>
+                    <td class="text-center">{{ selectedUser.borrowed_book?.length }}</td>
+                </tr>
+                <h3>Libros</h3>
+                <tr *ngFor="let item of selectedUserHistory">
+                    <td>
+                        {{ item.book_title }} - {{ item.action === 'borrow' ? 'Préstamo' : 'Devolución' }}
+                    </td>
+                    <td>
+                        {{ item.timestamp | date:'short' }}
+                    </td>
+                </tr>
+            </table>
+            <button (click)="closeUserDetails()">Cerrar</button>
+        </div>
     </div>
-    <div *ngIf="showUserDetails" class="table-container dashboard-content">
-        <h4>Detalle de {{ selectedUser.username }}</h4>
-        <table>
-            <tr>
-                <th>Correo</th>
-                <th>Lirbos prestados</th>
-            </tr>
-            <tr>
-                <td>{{ selectedUser.email }}</td>
-                <td class="text-center">{{ selectedUser.borrowed_book?.length }}</td>
-            </tr>
-            <h3>Libros</h3>
-            <tr *ngFor="let item of selectedUserHistory">
-                <td>
-                    {{ item.book_title }} - {{ item.action === 'borrow' ? 'Préstamo' : 'Devolución' }}
-                </td>
-                <td>
-                    {{ item.timestamp | date:'short' }}
-                </td>
-            </tr>
-        </table>
-        <button (click)="closeUserDetails()">Cerrar</button>
+    <div *ngIf="viewMode === 'books'" class="books-table-container">
+        <h3>Libros</h3>
+        <div class="book-create-options display-evenly">
+            <button (click)="openModalBookCreate()">Crear libro</button>
+            <button (click)="openModalBulkCreate()">Carga masiva de libros</button>
+        </div>
+        <div class="table-container dashboard-content">
+            <table>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Año de publicación</th>
+                    <th>Cantidad disponible</th>
+                </tr>
+                <tr *ngFor="let book of books">
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td class="text-center">{{ book.year_publication }}</td>
+                    <td class="text-center">{{ book.stock }}</td>
+                    <td class="text-center">
+                        <button (click)="openEditBookModal(book)">Editar</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 
 <!-- Modal para crear libro -->
 <div *ngIf="showBookCreateModal" class="modal-backdrop">
-  <h3>Crear libro</h3>
-  <form (ngSubmit)="createBook()">
-    <input type="text" [(ngModel)]="newBook.title" name="title" placeholder="Título" required>
-    <input type="text" [(ngModel)]="newBook.author" name="author" placeholder="Autor" required>
-    <input type="number" [(ngModel)]="newBook.year_publication" name="year_publication" placeholder="Año" required>
-    <input type="number" [(ngModel)]="newBook.stock" name="stock" placeholder="Cantidad" required>
-    <button type="submit" [disabled]="!newBook.title || !newBook.author || !newBook.year_publication || !newBook.stock">
-        Crear
-    </button>
-    <button type="button" (click)="closeModalBookCreate()">Cancelar</button>
-  </form>
+    <h3>Crear libro</h3>
+    <form (ngSubmit)="createBook()">
+        <input type="text" [(ngModel)]="newBook.title" name="title" placeholder="Título" required>
+        <input type="text" [(ngModel)]="newBook.author" name="author" placeholder="Autor" required>
+        <input type="number" [(ngModel)]="newBook.year_publication" name="year_publication" placeholder="Año" required>
+        <input type="number" [(ngModel)]="newBook.stock" name="stock" placeholder="Cantidad" required>
+        <button type="submit"
+            [disabled]="!newBook.title || !newBook.author || !newBook.year_publication || !newBook.stock">
+            Crear
+        </button>
+        <button type="button" (click)="closeModalBookCreate()">Cancelar</button>
+    </form>
 </div>
 
 <!-- Modal para carga masiva -->
 <div *ngIf="showBulkCreateModal" class="modal-backdrop">
-  <h3>Carga masiva de libros</h3>
-  <form (ngSubmit)="bulkCreateBooks()">
-    <input type="file" (change)="onBulkFileChange($event)">
-    <button type="submit" [disabled]="!bulkFile">Cargar</button>
-    <button type="button" (click)="closeModalBulkCreate()">Cancelar</button>
-  </form>
+    <h3>Carga masiva de libros</h3>
+    <form (ngSubmit)="bulkCreateBooks()">
+        <input type="file" (change)="onBulkFileChange($event)">
+        <button type="submit" [disabled]="!bulkFile">Cargar</button>
+        <button type="button" (click)="closeModalBulkCreate()">Cancelar</button>
+    </form>
 </div>
 
 <!-- Modal para editar libro -->
 <div *ngIf="editBookModal" class="modal-backdrop">
-  <h3>Editar libro</h3>
-  <form (ngSubmit)="updateBook()">
-    <input type="text" [(ngModel)]="bookToEdit.title" name="editTitle" placeholder="Título" required>
-    <input type="text" [(ngModel)]="bookToEdit.author" name="editAuthor" placeholder="Autor" required>
-    <input type="number" [(ngModel)]="bookToEdit.year_publication" name="editYear" placeholder="Año" required>
-    <input type="number" [(ngModel)]="bookToEdit.stock" name="editStock" placeholder="Cantidad" required>
-    <button type="submit"
-      [disabled]="!bookToEdit.title || !bookToEdit.author || !bookToEdit.year_publication || !bookToEdit.stock">
-      Guardar cambios
-    </button>
-    <button type="button" (click)="closeEditBookModal()">Cancelar</button>
-  </form>
+    <h3>Editar libro</h3>
+    <form (ngSubmit)="updateBook()">
+        <input type="text" [(ngModel)]="bookToEdit.title" name="editTitle" placeholder="Título" required>
+        <input type="text" [(ngModel)]="bookToEdit.author" name="editAuthor" placeholder="Autor" required>
+        <input type="number" [(ngModel)]="bookToEdit.year_publication" name="editYear" placeholder="Año" required>
+        <input type="number" [(ngModel)]="bookToEdit.stock" name="editStock" placeholder="Cantidad" required>
+        <button type="submit"
+            [disabled]="!bookToEdit.title || !bookToEdit.author || !bookToEdit.year_publication || !bookToEdit.stock">
+            Guardar cambios
+        </button>
+        <button type="button" (click)="closeEditBookModal()">Cancelar</button>
+    </form>
 </div>
 
 <!-- Modal de espera -->

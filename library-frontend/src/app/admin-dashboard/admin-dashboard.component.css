@@ -1,7 +1,34 @@
-.book-create-options {
+.book-create-options,
+.list-options {
     width: 80%;
     margin: 4rem 0;
 }
+
+.user-table-container,
+.books-table-container {
+    width: 100%;
+    display: contents;
+}
+
+.user-table-container h3,
+.books-table-container h3 {
+    font-size: 2rem;
+    margin-top: 3rem;
+    color: #ffa500;
+}
+
+.list-options button {
+    width: 15rem;
+    height: 3rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #ffa500;
+    cursor: pointer;
+    color: #543a00;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .dashboard-container {
     justify-content: flex-start;
 }
