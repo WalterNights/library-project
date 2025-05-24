@@ -1,0 +1,38 @@
+.book-detail-container img {
+    max-width: 35rem;
+    max-height: 55rem;
+}
+
+.book-detail-content {
+    width: 50rem;
+    height: 50rem;
+}
+
+.book-detail-content h2 {
+    font-size: 5rem;
+    color: #ffa500;
+}
+
+.book-detail-content p:nth-child(2) {
+    font-size: 3rem;
+}
+
+.book-detail-content p:nth-child(3) {
+    font-size: 2rem;
+}
+
+.book-detail-content p:nth-child(4) {
+    font-size: 4rem;
+    color: #ffa500;
+}
+
+.book-detail-content button {
+    width: 100%;
+    height: 5rem;
+    border: none;
+    border-radius: 11px;
+    background-color: #ffa500;
+    color: #543a00;
+    font-size: 2.5rem;
+    cursor: pointer;
+}

@@ -1,7 +1,14 @@
-<h2>{{ book?.title }}</h2>
-<p><strong>Autor:</strong> {{ book?.author }}</p>
-<p><strong>Año:</strong> {{ book?.year_publication }}</p>
-<p><strong>Stock:</strong> {{ book?.stock }}</p>
-
-<button *ngIf="!hasBook" (click)="lend_book()">Solicitar</button>
-<button *ngIf="hasBook" (click)="return_book()">Devolver</button>
+<div class="user-access-container display-evenly book-detail-container">
+    <div class="display-center">
+        <img [src]="'book-' + book?.id + '.jpg'" alt="Book Cover" (error)="onImgErr($event)">
+    </div>
+    <div class="book-detail-content display-column-start">
+        <h2>{{ book?.title }}</h2>
+        <p><strong>Autor:</strong> {{ book?.author }}</p>
+        <p><strong>Año:</strong> {{ book?.year_publication }}</p>
+        <p><strong>Cantidad disponible:</strong> {{ book?.stock }}</p>
+    
+        <button *ngIf="!hasBook" (click)="lend_book()">Solicitar</button>
+        <button *ngIf="hasBook" (click)="return_book()">Devolver</button>
+    </div>
+</div>

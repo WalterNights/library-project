@@ -1,0 +1,19 @@
+.user-loan-container h2 {
+    font-size: 4rem;
+    color: #ffa500;
+    margin-bottom: 3rem;
+}
+
+.user-loan-error {
+    color: #c60000;
+    font-size: 2rem;
+    padding: 2rem;
+    font-weight: 700;
+}
+
+.user-loan-message {
+    
+    font-size: 2rem;
+    padding: 2rem;
+    font-weight: 700;
+}

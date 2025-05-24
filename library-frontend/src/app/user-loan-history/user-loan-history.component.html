@@ -1,20 +1,24 @@
-<h2>Historial de préstamos y devoluciones</h2>
-<div *ngIf="loading">Cargando...</div>
-<div *ngIf="error" style="color:red">{{ error }}</div>
-<table *ngIf="!loading && history.length">
-  <thead>
-    <tr>
-      <th>Libro</th>
-      <th>Acción</th>
-      <th>Fecha</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of history">
-      <td>{{ item.book_title }}</td>
-      <td>{{ item.action === 'borrow' ? 'Préstamo' : 'Devolución' }}</td>
-      <td>{{ item.timestamp | date:'short' }}</td>
-    </tr>
-  </tbody>
-</table>
-<div *ngIf="!loading && !history.length">No hay historial.</div>
+<div class="user-access-container display-column user-loan-container">
+  <h2>Historial de préstamos y devoluciones</h2>
+  <div class="user-loan-loading" *ngIf="loading">Cargando...</div>
+  <div class="user-loan-error" *ngIf="error" style="color:red">{{ error }}</div>
+  <div class="table-container">
+    <table *ngIf="!loading && history.length">
+      <thead>
+        <tr>
+          <th>Libro</th>
+          <th>Acción</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of history">
+          <td>{{ item.book_title }}</td>
+          <td>{{ item.action === 'borrow' ? 'Préstamo' : 'Devolución' }}</td>
+          <td>{{ item.timestamp | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="user-loan-message" *ngIf="!loading && !history.length">No hay historial.</div>
+</div>

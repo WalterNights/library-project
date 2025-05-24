@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -16,7 +16,11 @@ export class BookDetailComponent implements OnInit {
   user: any;
   hasBook = false;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     const bookId = this.route.snapshot.paramMap.get('id');
@@ -28,13 +32,31 @@ export class BookDetailComponent implements OnInit {
     if (!userId) {
       return;
     }
-    const token = localStorage.getItem('access_token');
+
+    const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
+    if (!token) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
+
     this.http.get('/api/users/me/', {
       headers: { Authorization: `Bearer ${token}` }
-    }).subscribe((user: any) => {
-      this.user = user;
-      this.hasBook = user.borrowed_book.includes(Number(bookId));
+    }).subscribe({
+      next: (user: any) => {
+        this.user = user;
+        this.hasBook = user.borrowed_book.includes(Number(bookId));
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          localStorage.removeItem('access_token');
+          this.router.navigate(['/auth/login']);
+        }
+      }
     });
+  }
+
+  onImgErr(event: Event) {
+    (event.target as HTMLImageElement).src = 'book-placeholder.png';
   }
 
   lend_book() {

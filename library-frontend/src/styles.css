@@ -14,6 +14,7 @@ html {
 .display-column,
 .display-between,
 .display-evenly,
+.display-column-start,
 .display-column-evenly,
 .display-column-between {
     display: flex;
@@ -27,6 +28,12 @@ html {
 .display-column {
     justify-content: center;
     flex-direction: column;
+}
+
+.display-column-start {
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
 }
 
 .display-evenly {
@@ -101,7 +108,7 @@ html {
 .submit-button {
     width: 80%;
     height: 4rem;
-    color: #7d4c00;
+    color: #543a00;
     font-size: 1.5rem;
     font-weight: 700;
     border: none;
@@ -160,8 +167,52 @@ html {
 }
 
 .index-book-options:hover {
-    background-color: #ffa500;;
+    background-color: #ffa500;
     transform: scale(1.1);
     color: white;
     transition: all 0.3s ease-in-out;
+}
+
+/*============book detail page styles ============*/
+
+.home-container,
+.books-list-container,
+.book-detail-container,
+.user-loan-container {
+    width: 100vw;
+    max-width: 100%;
+    min-height: calc(100vh - 5rem);
+}
+
+/*============tables styles ============*/
+
+.table-container {
+    width: 80%;
+    padding: 2rem;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container thead th{
+    font-size: 1.5rem;
+}
+
+.table-container tbody td{
+    font-size: 1.2rem;
+    background-color: #fafafa;
+}
+
+.table-container td {
+    padding: 0.5rem;
+    border: solid 1px #ccc;
+}
+
+.text-center {
+    text-align: center;
 }
