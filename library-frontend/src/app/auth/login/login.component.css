@@ -1,0 +1,11 @@
+.login-to-register button {
+    background: none;
+    border: none;
+    color: #ffa500;;
+    cursor: pointer;
+}
+
+.user-dontmatch {
+    color: red;
+    padding-bottom: 2rem;
+}
