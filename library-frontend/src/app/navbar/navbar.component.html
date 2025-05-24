@@ -1,6 +1,7 @@
 <nav>
   <div class="display-between">
     <button (click)="goBack()">Regresar</button>
+    <button *ngIf="isAdmin()" routerLink="/admin">Dashboard Admin</button>
     <button *ngIf="authService.isAuthenticated()" (click)="logout()">Cerrar sesión</button>
   </div>
 

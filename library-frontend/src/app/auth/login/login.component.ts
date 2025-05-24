@@ -29,6 +29,7 @@ export class LoginComponent {
           headers: { Authorization: `Bearer ${res.access}` }
         }).subscribe(user => {
           localStorage.setItem('user_id', user.id);
+          localStorage.setItem('user', JSON.stringify(user));
           setTimeout(() => {
             this.showModal = false;
             this.router.navigate(['/']);

@@ -1,11 +1,14 @@
 import pandas as pd
-from .models import Book, LoanHistory
 from rest_framework import status
-from .serializers import BookSerializer, LoanHistorySerializer
+from .models import User, Book, LoanHistory
+from .serializers import UserSerializer
 from rest_framework.response import Response
+from rest_framework.generics import ListAPIView
 from rest_framework import generics, permissions
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from .serializers import BookSerializer, LoanHistorySerializer
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
 
 class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
@@ -24,6 +27,26 @@ class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         if self.request.method in ['PUT', 'PATCH', 'DELETE']:
             return [permissions.IsAdminUser()]
         return [permissions.AllowAny()]
+    
+class UserListCreateAPIView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
+
+    def get_queryset(self):
+        return User.objects.exclude(rol='admin')
+    
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def user_loan_history_by_id(request, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        return Response({'error': 'Usuario no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    history = LoanHistory.objects.filter(user=user).order_by('-timestamp')
+    serializer = LoanHistorySerializer(history, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
     
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

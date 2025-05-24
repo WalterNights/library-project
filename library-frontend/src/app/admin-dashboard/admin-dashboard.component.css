@@ -1,0 +1,64 @@
+.book-create-options {
+    width: 80%;
+    margin: 4rem 0;
+}
+.dashboard-container {
+    justify-content: flex-start;
+}
+
+.dashboard-content {
+    margin-top: 2rem;
+}
+
+.dashboard-content h4 {
+    font-size: 2rem;
+}
+
+.dashboard-content h3 {
+    padding: 2rem 0;
+    font-size: 1.5rem;
+}
+
+.dashboard-content button {
+    margin-top: 2rem;
+}
+
+.modal-backdrop {
+    flex-direction: column;
+}
+
+.modal-backdrop h3 {
+    font-size: 5rem;
+    color: #ffa500;
+    margin-bottom: 5rem;
+    text-shadow: 0 0 black;
+}
+
+.modal-backdrop form {
+    width: 50%;
+    height: 40%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.modal-backdrop form input,
+.modal-backdrop form button {
+    width: 80%;
+    height: 3rem;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+.modal-backdrop form input {
+    background-color: #f4f3f3;
+}
+
+.modal-backdrop form button {
+    background-color: #ffa500;
+    cursor: pointer;
+}
