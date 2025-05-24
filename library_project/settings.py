@@ -73,15 +73,19 @@ WSGI_APPLICATION = 'library_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'library_project_k30g',
-        'USER': 'library_project_k30g_user',
-        'PASSWORD': '1B5tqOY3u84r9BK5LnbWYx4VwJddNQ2i',
-        'HOST': 'postgresql://library_project_k30g_user:1B5tqOY3u84r9BK5LnbWYx4VwJddNQ2i@dpg-d0p1ru3uibrs73876hg0-a/library_project_k30g',
+        'NAME': 'library_db',
+        'USER': 'library_user',
+        'PASSWORD': 'bighugoboss1987',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
+} """
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('HOST'))
 }
 
 
