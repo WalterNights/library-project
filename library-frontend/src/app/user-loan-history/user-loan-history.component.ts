@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-user-loan-history',
@@ -18,7 +19,7 @@ constructor(private http: HttpClient) {}
 
 ngOnInit(): void {
   const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
-  this.http.get<any[]>('/api/users/me/history', {
+  this.http.get<any[]>(`${environment.apiUrl}/users/me/history/`, {
     headers: { Authorization: `Bearer ${token}` }
   }).subscribe({
     next: data => {
