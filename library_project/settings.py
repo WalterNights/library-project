@@ -98,7 +98,7 @@ else:
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'library-project-1-tkid.onrender.com', '.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'library-project-dp42.onrender.com', '.onrender.com']
 
 CSRF_TRUSTED_ORIGINS = ['https://library-project-dp42.onrender.com', 'https://*.onrender.com']
 
