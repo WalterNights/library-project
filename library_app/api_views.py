@@ -31,7 +31,7 @@ class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
             return [permissions.IsAdminUser()]
         return [permissions.AllowAny()]
     
-@method_decorator(csrf_exempt, name='dispatch')  
+#@method_decorator(csrf_exempt, name='dispatch')  
 class UserListCreateAPIView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
