@@ -28,6 +28,6 @@ export class BooksListComponent {
   }
 
   viewDetails(bookId: number) {
-    this.router.navigate([`${environment.apiUrl}/books/`, bookId]);
+    this.router.navigate([`${environment.apiUrl}/books/${bookId}`]);
   }
 }
