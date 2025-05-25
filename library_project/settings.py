@@ -79,14 +79,24 @@ WSGI_APPLICATION = 'library_project.wsgi.application'
         'NAME': 'library_db',
         'USER': 'library_user',
         'PASSWORD': 'bighugoboss1987',
-        'HOST': 'localhost',
+        'HOST': 'postgresql://library_project_k30g_user:1B5tqOY3u84r9BK5LnbWYx4VwJddNQ2i@dpg-d0p1ru3uibrs73876hg0-a/library_project_k30g',
         'PORT': '5432',
     }
 } """
 
+RENDER_DATABASE_URL = os.environ.get('DATABASE_URL')
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('HOST'))
-}
+        'default': dj_database_url.config(
+            default=RENDER_DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
+
+""" DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+} """
 
 
 # Password validation
