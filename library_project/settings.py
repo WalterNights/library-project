@@ -124,6 +124,32 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'library-project-1-tkid.onrender.com'
 
 CSRF_TRUSTED_ORIGINS = ['https://library-project-1-tkid.onrender.com', 'https://*.onrender.com']
 
+# Configuración de CORS
+CORS_ALLOWED_ORIGINS = [
+    "https://library-project-dp42.onrender.com", 
+    "https://library-project-1-tkid.onrender.com", 
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
