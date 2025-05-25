@@ -1,8 +1,9 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-book-detail',
@@ -24,7 +25,7 @@ export class BookDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const bookId = this.route.snapshot.paramMap.get('id');
-    this.http.get(`/api/books/${bookId}/`).subscribe(book => {
+    this.http.get(`${environment.apiUrl}/books/${bookId}/`).subscribe(book => {
       this.book = book;
     });
 
@@ -39,7 +40,7 @@ export class BookDetailComponent implements OnInit {
       return;
     }
 
-    this.http.get('/api/users/me/', {
+    this.http.get(`${environment.apiUrl}/users/me/`, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: (user: any) => {
@@ -61,7 +62,7 @@ export class BookDetailComponent implements OnInit {
 
   lend_book() {
     const token = localStorage.getItem('access_token');
-    this.http.post(`api/books/${this.book.id}/lend/`, {},
+    this.http.post(`${environment.apiUrl}/books/${this.book.id}/lend/`, {},
       {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(() => {
@@ -71,7 +72,7 @@ export class BookDetailComponent implements OnInit {
 
   return_book() {
     const token = localStorage.getItem('access_token');
-    this.http.post(`api/books/${this.book.id}/return/`, {},
+    this.http.post(`${environment.apiUrl}/books/${this.book.id}/return/`, {},
       {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(() => {

@@ -17,7 +17,7 @@ export class BooksListComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    this.http.get<any[]>(`${environment.apiUrl}/api/books/`).subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/books/`).subscribe({
       next: (data) => {
         this.books = data;
       },
@@ -28,6 +28,6 @@ export class BooksListComponent {
   }
 
   viewDetails(bookId: number) {
-    this.router.navigate(['/books', bookId]);
+    this.router.navigate([`${environment.apiUrl}/books`, bookId]);
   }
 }
