@@ -2,6 +2,8 @@ from pathlib import Path
 
 import dj_database_url
 import os
+from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5j5i)%l!a6i4wg=dz$fcy^i-8222p(35rmf_53-q435mb-zj#%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = [
     'library-project-dp42.onrender.com',
@@ -84,15 +86,39 @@ WSGI_APPLICATION = 'library_project.wsgi.application'
     }
 } """
 
-RENDER_DATABASE_URL = os.environ.get('DATABASE_URL')
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=RENDER_DATABASE_URL,
-        conn_max_age=600,
-        ssl_require=True,
-    )
-}
+try:
+    from dotenv import load_dotenv
+    
+    load_dotenv(os.path.join(BASE_DIR, '.env'))
+except ImportError:
+    
+    pass
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+print(f"DEBUG: DATABASE_URL leída del entorno: {DATABASE_URL}")
+
+if DATABASE_URL:
+   
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
+else:
+    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'library-project-1-tkid.onrender.com', '.onrender.com']
 
