@@ -93,7 +93,10 @@ else:
         }
     }
 
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+
+#DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'library-project-1-tkid.onrender.com', '.onrender.com']
 
