@@ -1,5 +1,6 @@
 from . import api_views
 from django.urls import path
+from django.http import HttpResponse
 from library_app.views import current_user
 
 from rest_framework_simplejwt.views import (
@@ -7,7 +8,12 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+def test_api_view(request):
+    return HttpResponse("API Test successful!", status=200)
+
 urlpatterns = [
+    path('test/', test_api_view, name='api_test'),
+    
     path('books/', api_views.BookListCreateAPIView.as_view(), name='api_books'),
     path('books/<int:pk>/', api_views.BookDetailAPIView.as_view(), name='api_book_detail'),
     path('books/<int:pk>/lend/', api_views.lend_book, name='api_lend_book'),
