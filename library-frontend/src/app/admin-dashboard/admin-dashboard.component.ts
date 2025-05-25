@@ -29,11 +29,11 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const token = localStorage.getItem('access_token');
-    this.http.get<any>('/api/users', {
+    this.http.get<any>('/api/users/', {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(users => this.users = users);
 
-    this.http.get<any>('/api/books', {
+    this.http.get<any>('/api/books/', {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(books => {
       this.books = books;
