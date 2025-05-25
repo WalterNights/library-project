@@ -9,6 +9,9 @@ from .serializers import BookSerializer, LoanHistorySerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 
 class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
@@ -28,6 +31,7 @@ class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
             return [permissions.IsAdminUser()]
         return [permissions.AllowAny()]
     
+@method_decorator(csrf_exempt, name='dispatch')  
 class UserListCreateAPIView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

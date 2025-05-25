@@ -70,22 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'library_project.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-
-""" DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'library_db',
-        'USER': 'library_user',
-        'PASSWORD': 'bighugoboss1987',
-        'HOST': 'postgresql://library_project_k30g_user:1B5tqOY3u84r9BK5LnbWYx4VwJddNQ2i@dpg-d0p1ru3uibrs73876hg0-a/library_project_k30g',
-        'PORT': '5432',
-    }
-} """
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 try:
@@ -150,9 +134,6 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -168,10 +149,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -180,14 +157,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -199,5 +169,3 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
-
-#CORS_ALLOW_ALL_ORIGINS = True
