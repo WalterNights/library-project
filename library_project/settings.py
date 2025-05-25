@@ -1,7 +1,7 @@
 from pathlib import Path
 
-import dj_database_url
 import os
+import dj_database_url
 from pathlib import Path
 
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,13 +80,9 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 print(f"DEBUG: DATABASE_URL leída del entorno: {DATABASE_URL}")
 
 if DATABASE_URL:
-   
     DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True,
-        )
+        #'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600, ssl_require=True,)
+        'default': dj_database_url.parse(DATABASE_URL)
     }
 else:
     
@@ -152,6 +149,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

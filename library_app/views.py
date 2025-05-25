@@ -17,7 +17,6 @@ from django.utils.decorators import method_decorator
 #@method_decorator(csrf_exempt, name='dispatch')
 class RegisterUserApiView(APIView):
     def post(self, request):
-        print("============", request.data)
         form = RegisterUserForm(request.data)
         if form.is_valid():
             form.save()
