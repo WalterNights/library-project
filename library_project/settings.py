@@ -4,7 +4,6 @@ import os
 import dj_database_url
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -151,9 +150,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
+STATIC_ROOT = BASE_DIR / 'staticfiles' # Asegurar que esta línea esté
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
