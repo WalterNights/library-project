@@ -23,11 +23,11 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   login() {
-    this.http.post<any>(`${environment.apiUrl}/api/token/`, this.credentials).subscribe({
+    this.http.post<any>(`${environment.apiUrl}/token/`, this.credentials).subscribe({
       next: res => {
         localStorage.setItem('access_token', res.access);
         this.showModal = true;
-        this.http.get<any>(`${environment.apiUrl}/api/users/me/`, {
+        this.http.get<any>(`${environment.apiUrl}/users/me/`, {
           headers: { Authorization: `Bearer ${res.access}` }
         }).subscribe(user => {
           localStorage.setItem('user_id', user.id);
