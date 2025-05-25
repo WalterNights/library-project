@@ -2,6 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
@@ -52,7 +53,7 @@ export class AdminDashboardComponent implements OnInit {
     this.selectedUser = user;
     this.showUserDetails = true;
     const token = localStorage.getItem('access_token');
-    this.http.get<any[]>(`/api/users/${user.id}/history`, {
+    this.http.get<any[]>(`${environment.apiUrl}/users/${user.id}/history`, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(history => {
       this.selectedUserHistory = history;
@@ -64,12 +65,12 @@ export class AdminDashboardComponent implements OnInit {
   createBook() {
     const token = localStorage.getItem('access_token');
     this.showModal = true;
-    this.http.post('/api/books/', this.newBook, {
+    this.http.post(`${environment.apiUrl}/books/`, this.newBook, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(() => {
       this.closeModalBookCreate();
       // Recarga la lista de libros
-      this.http.get<any>('/api/books/', {
+      this.http.get<any>(`${environment.apiUrl}/books/`, {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(books => {
         this.books = books;
@@ -92,12 +93,12 @@ export class AdminDashboardComponent implements OnInit {
       formData.append('file', this.bulkFile);
       const token = localStorage.getItem('access_token');
       this.showModal = true;
-      this.http.post('/api/books/bulk_upload/', formData, {
+      this.http.post(`${environment.apiUrl}/books/bulk_upload/`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(() => {
         this.closeModalBulkCreate();
         // Recarga la lista de libros
-        this.http.get<any>('/api/books/', {
+        this.http.get<any>(`${environment.apiUrl}/books/`, {
           headers: { Authorization: `Bearer ${token}` }
         }).subscribe(books => {
           this.books = books;
@@ -125,13 +126,13 @@ export class AdminDashboardComponent implements OnInit {
   updateBook() {
     const token = localStorage.getItem('access_token');
     this.showModal = true;
-    this.http.put(`/api/books/${this.bookToEdit.id}/`, this.bookToEdit, {
+    this.http.put(`${environment.apiUrl}/books/${this.bookToEdit.id}/`, this.bookToEdit, {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe(() => {
       this.editBookModal = false;
       this.bookToEdit = null;
       // Recarga la lista de libros
-      this.http.get<any>('/api/books/', {
+      this.http.get<any>(`${environment.apiUrl}/books/`, {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe(books => {
         this.books = books;
