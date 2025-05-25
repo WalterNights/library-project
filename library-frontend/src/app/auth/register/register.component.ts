@@ -49,7 +49,7 @@ export class RegisterComponent {
         this.showModal = true;
         setTimeout(() => {
           this.showModal = false;
-          this.router.navigate(['/login']);
+          this.router.navigate(['/auth/login']);
         }, 3000);
       },
       error: err => {
