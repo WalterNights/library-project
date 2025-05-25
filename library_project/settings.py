@@ -87,17 +87,16 @@ WSGI_APPLICATION = 'library_project.wsgi.application'
 RENDER_DATABASE_URL = os.environ.get('DATABASE_URL')
 
 DATABASES = {
-        'default': dj_database_url.config(
-            default=RENDER_DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True,
-        )
-    }
+    'default': dj_database_url.config(
+        default=RENDER_DATABASE_URL,
+        conn_max_age=600,
+        ssl_require=True,
+    )
+}
 
-""" DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-} """
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'library-project-1-tkid.onrender.com', '.onrender.com']
 
+CSRF_TRUSTED_ORIGINS = ['https://library-project-1-tkid.onrender.com', 'https://*.onrender.com']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
