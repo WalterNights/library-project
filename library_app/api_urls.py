@@ -22,8 +22,8 @@ urlpatterns = [
     
     path('users/', api_views.UserListCreateAPIView.as_view(), name='api_users'),
     path('users/me/', current_user, name='current_user'),
-    path('users/me/history', api_views.user_loan_history, name='user_loan_history'),
-    path('users/<int:user_id>/history', api_views.user_loan_history_by_id, name='user_loan_history_by_id'),
+    path('users/me/history/', api_views.user_loan_history, name='user_loan_history'),
+    path('users/<int:user_id>/history/', api_views.user_loan_history_by_id, name='user_loan_history_by_id'),
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
